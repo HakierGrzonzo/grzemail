@@ -3,7 +3,7 @@ import logging
 from email.mime.text import MIMEText
 from .services import config_class as config
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 emails = config.get_email_accounts()
 
