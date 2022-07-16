@@ -71,5 +71,10 @@ class Email:
         async for connection in self._connect_imap():
             mailboxes = await Client(connection).get_mailboxes()
             print(mailboxes)
-            async for mailbox in mailboxes["Junk"].use_wrapped():
-                print(mailbox)
+            async for mailbox in mailboxes["INBOX"].use_wrapped():
+                async for message in mailbox.search(
+                    FilterFactory().FROM("Waldemar.Paszkowski@polsl.pl")
+                ):
+                    print(message)
+                    await message.fetch_body()
+                    print(message.get_body_text())
