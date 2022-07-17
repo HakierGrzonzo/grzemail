@@ -1,6 +1,4 @@
 from email.mime.base import MIMEBase
-from email import message_from_bytes
-from email.header import decode_header
 import logging
 from typing import AsyncGenerator
 from aiosmtplib import SMTP
@@ -23,6 +21,12 @@ class Email:
         self._port = int(config.get("port", 587))
         logger.debug(f"Creating email {self}")
         pass
+
+    def get_name(self) -> str:
+        return f"{self._name} <{self._address}>"
+
+    def get_id(self) -> int:
+        return hash(f"{self._address}, {self._host}, {self._port}")
 
     def __repr__(self) -> str:
         return (
@@ -66,6 +70,14 @@ class Email:
         async for connection in self._connect_smtp():
             print(connection)
             # await connection.send_message(body)
+
+    async def get_mailboxes(self):
+        res = {}
+        async for connection in self._connect_imap():
+            mailboxes = await Client(connection).get_mailboxes()
+            for k, v in mailboxes.items():
+                res[k] = v
+        return res
 
     async def get_mail(self):
         async for connection in self._connect_imap():

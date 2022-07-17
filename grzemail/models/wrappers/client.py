@@ -1,8 +1,11 @@
+import logging
 from aioimaplib.aioimaplib import IMAP4_SSL
 from grzemail.models.wrappers.mailbox import MailBox
 from grzemail.models.wrappers.wrapper import Wrapper
 
 from grzemail.utils.namespace import parse_mailbox, parse_namespace
+
+logger = logging.getLogger(__name__)
 
 
 class Client:
@@ -11,6 +14,7 @@ class Client:
         self._separator = None
 
     async def get_mailboxes(self):
+        logger.info("Getting mailboxes")
         res, data = await self._connection.namespace()
         if res != "OK":
             raise Exception("Failed to namespace inboxes")
@@ -20,6 +24,7 @@ class Client:
             raise Exception("Failed to list inboxes")
         # Get rid of the last result, it is some performence data
         mailboxes = [parse_mailbox(x) for x in data[:-1]]
+        logger.info(f"Got {len(mailboxes)} mailboxes")
         return {
             mailbox["name"]: Wrapper(MailBox(self._connection, mailbox["name"]))
             for mailbox in mailboxes

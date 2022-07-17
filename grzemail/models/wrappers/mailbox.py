@@ -12,6 +12,9 @@ class MailBox(Setupable):
         self._name = name
         self._connection = connection
 
+    def get_name(self) -> str:
+        return self._name
+
     async def setup(self):
         res, _ = await self._connection.select(self._name)
         if res != "OK":
