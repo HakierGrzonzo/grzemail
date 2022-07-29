@@ -176,6 +176,18 @@ cryptography = ">=2.0"
 jeepney = ">=0.6"
 
 [[package]]
+name = "socpi"
+version = "0.1.0"
+description = "A socket api framework"
+category = "main"
+optional = false
+python-versions = ">=3.10,<4.0"
+
+[package.source]
+type = "file"
+url = "../socpi/dist/socpi-0.1.0-py3-none-any.whl"
+
+[[package]]
 name = "sqlalchemy"
 version = "1.4.39"
 description = "Database Abstraction Library"
@@ -221,7 +233,7 @@ rich = ">=12.3.0,<13.0.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "11bf6347d6fc503dbd7ebf6c5d280f0e4ccf474f65261ede494a2c0a7204ce3a"
+content-hash = "b737b26128340696b7d8743255e5935401f4a103f306b4a6128b2381e1f8e108"
 
 [metadata.files]
 aioimaplib-hakiergrzonzo = []
@@ -415,6 +427,9 @@ rich = [
 secretstorage = [
     {file = "SecretStorage-3.3.2-py3-none-any.whl", hash = "sha256:755dc845b6ad76dcbcbc07ea3da75ae54bb1ea529eb72d15f83d26499a5df319"},
     {file = "SecretStorage-3.3.2.tar.gz", hash = "sha256:0a8eb9645b320881c222e827c26f4cfcf55363e8b374a021981ef886657a912f"},
+]
+socpi = [
+    {file = "socpi-0.1.0-py3-none-any.whl", hash = "sha256:9c9b2a087280c87f4d8ec3f8cacf2d45df8cd15be73f184b89b5460b54e7f5ee"},
 ]
 sqlalchemy = [
     {file = "SQLAlchemy-1.4.39-cp27-cp27m-macosx_10_14_x86_64.whl", hash = "sha256:4770eb3ba69ec5fa41c681a75e53e0e342ac24c1f9220d883458b5596888e43a"},

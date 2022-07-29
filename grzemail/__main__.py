@@ -1,12 +1,7 @@
+from .daemon import app
 import logging
-from .services import config_class as config
+import asyncio
 
-logging.basicConfig(level=logging.INFO, filename="loger.txt")
-
-
-async def main(app_factory):
-    app = await app_factory()
-    await app.run_async()
 
 
 if __name__ == "__main__":
@@ -17,7 +12,13 @@ if __name__ == "__main__":
     )
     parser.add_argument("mode", type=str)
     args = parser.parse_args()
+    if args.mode == 'deamon':
+        logging.basicConfig(level=logging.INFO)
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(app.run())
+        
     if args.mode.lower() == "client":
+        logging.basicConfig(level=logging.INFO, filename="loger.txt")
         from .client import Grzemail
 
         Grzemail.run(log="log.txt")

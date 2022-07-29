@@ -7,13 +7,12 @@ from textual.views import GridView
 
 
 from ..models.email import Email
-
-from ..services import config_class
+from ..daemon import client
 
 
 class EmailBar(GridView):
     async def on_mount(self):
-        self.accounts = config_class.get_email_accounts()
+        self.accounts = (await client.get_accounts()).values()
 
         def make_account_button(account: Email):
             return Button(
