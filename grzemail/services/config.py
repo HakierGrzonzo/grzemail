@@ -11,6 +11,18 @@ class Config:
             parser.read_file(f)
         self.config = parser
 
+    def get_cache_dir(self):
+        path = self.config.get(
+            "directories",
+            "cache",
+            fallback=os.path.expanduser("~/.cache/grzemail"),
+        )
+        try:
+            os.mkdir(path)
+        except FileExistsError:
+            pass
+        return path
+
     def get_email_accounts(self):
         email_sections = [
             (section.replace("Email-", "", 1), section)

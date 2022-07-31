@@ -13,4 +13,5 @@ class Secrets:
         if password:
             logger.info(f"Getting password for {username}")
             return password
+        logger.error(f"Failed to get password for {username}")
         raise Exception(f"No password set for {username}")

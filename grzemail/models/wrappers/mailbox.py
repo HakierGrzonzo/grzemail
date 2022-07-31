@@ -1,9 +1,13 @@
-import asyncio
 from aioimaplib.aioimaplib import IMAP4_SSL
+from sqlalchemy.util import asyncio
 from .message import Message
 
 from grzemail.services.FilterFactory import FilterFactory
 from .wrapper import Setupable
+import logging
+import asyncio
+
+logger = logging.getLogger(__name__)
 
 
 class MailBox(Setupable):
@@ -32,7 +36,7 @@ class MailBox(Setupable):
             Message(self._connection, uid) for uid in message_uids
         ]
         for message in proto_messages:
-            await message.fetch_headers()
+            await asyncio.gather(message.fetch_headers(), asyncio.sleep(1))
             yield message
 
     async def close(self):

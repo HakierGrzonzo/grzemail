@@ -5,6 +5,8 @@ from aiosmtplib import SMTP
 from aioimaplib import aioimaplib
 
 from grzemail.models.wrappers.client import Client
+from grzemail.models.wrappers.message import Message
+from grzemail.utils.hash import static_hash
 
 from ..services.FilterFactory import FilterFactory
 
@@ -26,7 +28,7 @@ class Email:
         return f"{self._name} <{self._address}>"
 
     def get_id(self) -> int:
-        return hash(f"{self._address}, {self._host}, {self._port}")
+        return static_hash(self._address)
 
     def __repr__(self) -> str:
         return (
@@ -72,21 +74,17 @@ class Email:
             # await connection.send_message(body)
 
     async def get_mailboxes(self):
-        res = {}
+        res = []
         async for connection in self._connect_imap():
             mailboxes = await Client(connection).get_mailboxes()
-            for k, v in mailboxes.items():
-                res[k] = v
+            res = mailboxes.keys()
         return res
 
-    async def get_mail(self):
+    async def get_mail(
+        self, filter: FilterFactory, mailbox_name: str
+    ) -> AsyncGenerator[Message, None]:
         async for connection in self._connect_imap():
             mailboxes = await Client(connection).get_mailboxes()
-            print(mailboxes)
-            async for mailbox in mailboxes["INBOX"].use_wrapped():
-                async for message in mailbox.search(
-                    FilterFactory().FROM("Waldemar.Paszkowski@polsl.pl")
-                ):
-                    print(message)
-                    await message.fetch_body()
-                    print(message.get_body_text())
+            async for mailbox in mailboxes[mailbox_name].use_wrapped():
+                async for message in mailbox.search(filter):
+                    yield message

@@ -1,4 +1,12 @@
 [[package]]
+name = "aiofiles"
+version = "0.8.0"
+description = "File support for asyncio."
+category = "main"
+optional = false
+python-versions = ">=3.6,<4.0"
+
+[[package]]
 name = "aioimaplib-hakiergrzonzo"
 version = "1.0.1"
 description = "Python asyncio IMAP4rev1 client library"
@@ -22,6 +30,17 @@ python-versions = ">=3.5.2,<4.0.0"
 [package.extras]
 uvloop = ["uvloop (>=0.13,<0.15)"]
 docs = ["sphinx (>=2,<4)", "sphinx_autodoc_typehints (>=1.7.0,<2.0.0)"]
+
+[[package]]
+name = "aiosqlite"
+version = "0.17.0"
+description = "asyncio bridge to the standard sqlite3 module"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+typing_extensions = ">=3.7.2"
 
 [[package]]
 name = "argparse"
@@ -177,15 +196,11 @@ jeepney = ">=0.6"
 
 [[package]]
 name = "socpi"
-version = "0.1.0"
-description = "A socket api framework"
+version = "0.2.1"
+description = "A simple socket api framework"
 category = "main"
 optional = false
 python-versions = ">=3.10,<4.0"
-
-[package.source]
-type = "file"
-url = "../socpi/dist/socpi-0.1.0-py3-none-any.whl"
 
 [[package]]
 name = "sqlalchemy"
@@ -230,16 +245,32 @@ python-versions = ">=3.7,<4.0"
 [package.dependencies]
 rich = ">=12.3.0,<13.0.0"
 
+[[package]]
+name = "typing-extensions"
+version = "4.3.0"
+description = "Backported and Experimental Type Hints for Python 3.7+"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "b737b26128340696b7d8743255e5935401f4a103f306b4a6128b2381e1f8e108"
+content-hash = "a5da8181d740e95612d3a0e1861001bcd96d9b1fda4f40e3689ddec921d969ac"
 
 [metadata.files]
+aiofiles = [
+    {file = "aiofiles-0.8.0-py3-none-any.whl", hash = "sha256:7a973fc22b29e9962d0897805ace5856e6a566ab1f0c8e5c91ff6c866519c937"},
+    {file = "aiofiles-0.8.0.tar.gz", hash = "sha256:8334f23235248a3b2e83b2c3a78a22674f39969b96397126cc93664d9a901e59"},
+]
 aioimaplib-hakiergrzonzo = []
 aiosmtplib = [
     {file = "aiosmtplib-1.1.6-py3-none-any.whl", hash = "sha256:84174765778b2c5e0e207fbce0a769202fcf0c3de81faa87cc03551a6333bfa9"},
     {file = "aiosmtplib-1.1.6.tar.gz", hash = "sha256:d138fe6ffecbc9e6320269690b9ac0b75e540ef96e8f5c77d4a306760014dce2"},
+]
+aiosqlite = [
+    {file = "aiosqlite-0.17.0-py3-none-any.whl", hash = "sha256:6c49dc6d3405929b1d08eeccc72306d3677503cc5e5e43771efc1e00232e8231"},
+    {file = "aiosqlite-0.17.0.tar.gz", hash = "sha256:f0e6acc24bc4864149267ac82fb46dfb3be4455f99fe21df82609cc6e6baee51"},
 ]
 argparse = [
     {file = "argparse-1.4.0-py2.py3-none-any.whl", hash = "sha256:c31647edb69fd3d465a847ea3157d37bed1f95f19760b11a47aa91c04b666314"},
@@ -429,7 +460,8 @@ secretstorage = [
     {file = "SecretStorage-3.3.2.tar.gz", hash = "sha256:0a8eb9645b320881c222e827c26f4cfcf55363e8b374a021981ef886657a912f"},
 ]
 socpi = [
-    {file = "socpi-0.1.0-py3-none-any.whl", hash = "sha256:9c9b2a087280c87f4d8ec3f8cacf2d45df8cd15be73f184b89b5460b54e7f5ee"},
+    {file = "socpi-0.2.1-py3-none-any.whl", hash = "sha256:ce90b7286dca3ea41771a88ac39925f2fa8105e96d3b77716625b456acf116a2"},
+    {file = "socpi-0.2.1.tar.gz", hash = "sha256:ebded5780220439d3ea09e8f6caf17ae1b6803692afb78342c813faf8388e1e2"},
 ]
 sqlalchemy = [
     {file = "SQLAlchemy-1.4.39-cp27-cp27m-macosx_10_14_x86_64.whl", hash = "sha256:4770eb3ba69ec5fa41c681a75e53e0e342ac24c1f9220d883458b5596888e43a"},
@@ -472,4 +504,8 @@ sqlalchemy = [
 textual = [
     {file = "textual-0.1.18-py3-none-any.whl", hash = "sha256:59110935418c597c1c50876edfd6799ad5b59d51a91ca6744fc45e36eb89638e"},
     {file = "textual-0.1.18.tar.gz", hash = "sha256:b2883f8ed291de58b9aa73de6d24bbaae0174687487458a4eb2a7c188a2acf23"},
+]
+typing-extensions = [
+    {file = "typing_extensions-4.3.0-py3-none-any.whl", hash = "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02"},
+    {file = "typing_extensions-4.3.0.tar.gz", hash = "sha256:e6d2677a32f47fc7eb2795db1dd15c1f34eff616bcaf2cfb5e997f854fa1c4a6"},
 ]

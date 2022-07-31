@@ -26,6 +26,7 @@ class Wrapper(Generic[T]):
         return f"<Wrapper>{self._child}</Wrapper>"
 
     def get_name(self) -> str:
+        print("here")
         return self._child.get_name()
 
     async def use_wrapped(self) -> AsyncGenerator[T, None]:
